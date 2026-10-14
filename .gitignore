@@ -1,0 +1,7 @@
+node_modules
+dist
+logs
+estado.json
+estado.json.tmp
+config.ini
+*.log

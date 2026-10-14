@@ -1,0 +1,21 @@
+{
+  "name": "product-sync",
+  "version": "1.0.0",
+  "description": "Sincroniza produtos do Firebird 2.5 do cliente com a API de produtos",
+  "private": true,
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "build": "pkg . --targets node18-win-x64 --output dist/product-sync.exe"
+  },
+  "pkg": {
+    "assets": []
+  },
+  "dependencies": {
+    "ini": "^4.1.3",
+    "node-firebird": "^1.1.9"
+  },
+  "devDependencies": {
+    "pkg": "^5.8.1"
+  }
+}
