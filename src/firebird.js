@@ -11,14 +11,15 @@ SELECT
     PDG.REFERENCIA                                   AS REFERENCIA,
     (PDT.ESTDISPONIVEL / NULLIF(PDG.QTDEEMBALAGEM, 0)) AS ESTOQUEATUAL,
     PDT.PRPRATICADO                                  AS PRECOVENDA,
-    MAR.DESCRICAO                                    AS DESCRICAOMARCA
+    MAR.DESCRICAO                                    AS DESCRICAOMARCA,
+    PDT.EMPRESA                                      AS EMPRESA
 FROM TESTPRODUTOGERAL PDG
 LEFT OUTER JOIN TESTPRODUTO PDT ON (PDT.PRODUTO = PDG.CODIGO)
 LEFT OUTER JOIN TESTSETOR SETOR ON (SETOR.EMPRESA = PDT.EMPRESA AND SETOR.CODIGO = PDT.SETOR)
 LEFT OUTER JOIN TESTMARCA MAR ON (MAR.CODIGO = PDG.MARCA)
 WHERE PDT.EMPRESA IN (${empresas.map(() => '?').join(',')})
   AND SETOR.CODIGO IN (${setores})
-GROUP BY 1, 2, 3, 4, 5, 6, 7
+GROUP BY 1, 2, 3, 4, 5, 6, 7, 8
 `;
 
 function attach(options) {

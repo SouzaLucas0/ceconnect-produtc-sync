@@ -21,11 +21,15 @@ const arredondar = (valor, casas) => {
 };
 
 // Converte uma linha do Firebird no formato da API.
+// O código recebe a empresa na frente (ex: "01-000123"), para que o mesmo
+// código em empresas diferentes não se sobrescreva na API.
 // A ordem das chaves é fixa, para a comparação com o estado ser confiável.
 function toPayload(row, cliente) {
+  const codigoBase = texto(row.CODIGOPRODUTO, LIMITES.codigo);
+  const empresa = texto(row.EMPRESA, 10);
   return {
     cliente,
-    codigo: texto(row.CODIGOPRODUTO, LIMITES.codigo),
+    codigo: codigoBase && empresa ? `${empresa}-${codigoBase}`.slice(0, LIMITES.codigo) : codigoBase,
     descricao: texto(row.DESCRICAOPRODUTO, LIMITES.descricao),
     valor: Math.max(0, arredondar(row.PRECOVENDA, 2)),
     marca: texto(row.DESCRICAOMARCA, LIMITES.marca),
