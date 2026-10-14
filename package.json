@@ -4,6 +4,10 @@
   "description": "Sincroniza produtos do Firebird 2.5 do cliente com a API de produtos",
   "private": true,
   "main": "src/index.js",
+  "bin": "src/index.js",
+  "engines": {
+    "node": ">=18 <19"
+  },
   "scripts": {
     "start": "node src/index.js",
     "build": "pkg . --targets node18-win-x64 --output dist/product-sync.exe"
