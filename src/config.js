@@ -30,6 +30,16 @@ function loadConfig() {
     throw new Error('[sync] setores deve ser uma lista de inteiros, ex: 1,2,3');
   }
 
+  // Códigos de empresa são texto (preservam o zero à esquerda: "01")
+  const empresas = get('sync', 'empresa')
+    .split(',')
+    .map((e) => e.trim())
+    .filter(Boolean);
+
+  if (empresas.length === 0) {
+    throw new Error('[sync] empresa deve informar ao menos uma empresa, ex: 01 ou 01,02');
+  }
+
   const intervaloMinutos = Number(get('sync', 'intervalo_minutos'));
   const lote = Number(get('sync', 'lote'));
   if (!(intervaloMinutos > 0) || !(lote > 0)) {
@@ -52,7 +62,7 @@ function loadConfig() {
     },
     cliente: get('cliente', 'nome'),
     sync: {
-      empresa: get('sync', 'empresa'),
+      empresas,
       setores,
       intervaloMinutos,
       lote,
