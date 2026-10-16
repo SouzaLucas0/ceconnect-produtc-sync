@@ -10,7 +10,7 @@ async function main() {
   const statePath = statePathFor(cfg.baseDir);
 
   log.info(
-    `Serviço iniciado. Cliente: "${cfg.cliente}", empresa ${cfg.sync.empresa}, ` +
+    `Serviço iniciado. Cliente: "${cfg.cliente}", empresa ${cfg.sync.empresas.join(", ")}, ` +
       `setores ${cfg.sync.setores.join(',')}, a cada ${cfg.sync.intervaloMinutos} min`,
   );
 
